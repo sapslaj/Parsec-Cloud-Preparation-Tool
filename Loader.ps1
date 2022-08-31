@@ -1,5 +1,5 @@
-﻿cls
- Write-Host -foregroundcolor red "
+﻿Clear-Host
+Write-Host -ForegroundColor red "
                                ((//////                                
                              #######//////                             
                              ##########(/////.                         
@@ -51,23 +51,23 @@
                     Google P4  VW    (Tesla P4 Virtual Workstation)
                     Google T4  VW    (Tesla T4 Virtual Workstation)
     
-"                                         
+"
 Write-Output "Setting up Environment"
 $path = [Environment]::GetFolderPath("Desktop")
-if((Test-Path -Path $path\ParsecTemp ) -eq $true){
-    } 
-Else {
-    New-Item -Path $path\ParsecTemp -ItemType directory| Out-Null
-    }
+if ((Test-Path -Path $path\ParsecTemp) -eq $true) {
+}
+else {
+  New-Item -Path $path\ParsecTemp -ItemType directory | Out-Null
+}
 
 Unblock-File -Path .\*
-copy-Item .\* -Destination $path\ParsecTemp\ -Force -Recurse | Out-Null
+Copy-Item .\* -Destination $path\ParsecTemp\ -Force -Recurse | Out-Null
 #lil nap
 Start-Sleep -s 1
 #Unblocking all script files
 Write-Output "Unblocking files just in case"
 Get-ChildItem -Path $path\ParsecTemp -Recurse | Unblock-File
 Write-Output "Starting main script"
-start-process powershell.exe -verb RunAS -argument "-file $path\parsectemp\PostInstall\PostInstall.ps1"
-Write-Host "You can close this window now...progress will happen on the Powershell Window that just opened" -backgroundcolor red
-stop-process -Id $PID
+Start-Process powershell.exe -Verb RunAS -argument "-file $path\parsectemp\PostInstall\PostInstall.ps1"
+Write-Host "You can close this window now...progress will happen on the Powershell Window that just opened" -BackgroundColor red
+Stop-Process -Id $PID
